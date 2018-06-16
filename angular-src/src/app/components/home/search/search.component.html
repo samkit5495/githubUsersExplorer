@@ -1,0 +1,18 @@
+<div class="container">
+  <form #form="ngForm" (ngSubmit)="search(form)">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
+      <div class="input-group-append">
+        <button class="btn" type="submit">
+         Search <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="total_count" class="alert-info">We found {{total_count}} results for you!</div>
+  <div class="row">
+    <div *ngFor="let i of users" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-auto">
+      <app-user [user]="i"></app-user>
+    </div>
+  </div>
+</div>

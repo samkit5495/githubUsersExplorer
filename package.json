@@ -1,0 +1,23 @@
+{
+  "name": "githubUsersExplorer",
+  "version": "1.0.0",
+  "description": "githubUsersExplorer",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "start-dev": "nodemon app",
+    "heroku-postbuild": "npm install --prefix ./angular-src"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "cors": "*",
+    "express": "*",
+    "mongoose": "*",
+    "oauth2-server": "^2.4.1"
+  },
+  "author": "samkit5495",
+  "devDependencies": {
+    "nodemon": "^1.14.7"
+  }
+}

@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h3>{{user.login}}</h3>
+  </div>
+  <img src="{{user.avatar_url}}" class="card-img-top">
+  <div class="card-body">
+    <b>Score: </b>{{user.score}}
+  </div>
+  <div class="card-footer">
+    <button [routerLink]="['/home/profile',user.login]" class="btn btn-outline-success pull-left">
+      View <i class="fa fa-user"></i>
+    </button>
+    <a href="{{user.html_url}}" target="_blank" class="btn btn-outline-dark pull-right">
+      View <i class="fa fa-github"></i>
+    </a>
+  </div>
+</div>

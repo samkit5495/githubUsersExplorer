@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-header">
+    <h3>{{repo?.full_name}}</h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{repo?.name}}</h5>
+    <p class="card-text" *ngIf="repo?.description"><b>Description: </b>{{repo?.description}}</p>
+  </div>
+  <div class="card-footer">
+    <b>Last Updated: </b>{{repo?.updated_at}}
+    <a href="{{repo?.html_url}}" target="_blank" class="btn btn-outline-dark pull-right">
+      View <i class="fa fa-github"></i>
+    </a>
+  </div>
+</div>
