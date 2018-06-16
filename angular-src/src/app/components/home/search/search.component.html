@@ -1,15 +1,27 @@
 <div class="container">
-  <form #form="ngForm" (ngSubmit)="search(form)">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
-      <div class="input-group-append">
-        <button class="btn" type="submit">
-         Search <i class="fa fa-search"></i>
-        </button>
+  <div class="container" [ngClass]="{'centered': users.length==0}">
+    <div class="row align-items-center h-100">
+      <div class="col-12 mx-auto">
+        <div [ngClass]="{'jumbotron': users.length==0}">
+          <h1 align="center">Github Users Explorer</h1>
+          <form #form="ngForm" (ngSubmit)="search(form)">
+            <div class="input-group mb-3 col-md-8 mx-auto">
+              <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
+              <div class="input-group-append">
+                <button class="btn" type="submit" [disabled]="loading">
+                  <span *ngIf="loading">Searching </span>
+                  <span *ngIf="!loading">Search </span>
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <div *ngIf="total_count" class="text-center">We found {{total_count}} results for you!</div>
+        </div>
       </div>
     </div>
-  </form>
-  <div *ngIf="total_count" class="alert-info">We found {{total_count}} results for you!</div>
+  </div>
+
   <div class="row">
     <div *ngFor="let i of users" class="col-lg-3 col-md-4 col-sm-6 col-xs-12 mx-auto">
       <app-user [user]="i"></app-user>

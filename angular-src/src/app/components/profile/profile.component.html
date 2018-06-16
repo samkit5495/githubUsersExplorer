@@ -1,57 +1,64 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">
-          Personal Information
-        </div>
-        <img src="{{user?.avatar_url}}" class="card-img-top">
-        <div class="card-body">
-          <h4 class="card-title">{{user?.name}}</h4>
-          <h5 class="card-subtitle">{{user?.company}}</h5>
-          <p class="card-text">{{user?.bio}}</p>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <a href="{{user?.blog}}" target="_blank">{{user?.blog}}</a>
-            </li>
-            <li class="list-group-item">
-              <a href="mailto:{{user?.email}}" target="_blank">{{user?.email}}</a>
-            </li>
-            <li class="list-group-item">
-              <b>Location: </b>{{user?.location}}
-            </li>
-            <li class="list-group-item" *ngIf="user?.hireable">
-              Available for hire
-            </li>
-            <li class="list-group-item">
-              <b>Public Repos: </b>{{user?.public_repos}}
-            </li>
-            <li class="list-group-item">
-              <b>Public Gists: </b>{{user?.public_gists}}
-            </li>
-            <li class="list-group-item">
-              <b>Followers: </b>{{user?.followers}}
-            </li>
-            <li class="list-group-item">
-              <b>Following: </b>{{user?.following}}
-            </li>
-            <li class="list-group-item">
-              <b>Joined Github: </b>{{user?.created_at}}
-            </li>
-          </ul>
-        </div>
-        <div class="card-footer">
-          <b>Last Updated: </b>{{user?.updated_at}}
+  <div class="text-center card-header fixed-top" [ngClass]="{'centered':invalid}">
+    <i class="fa fa-arrow-left fa-3x pull-left" routerLink="/home/search"></i>
+    <h2 *ngIf="!invalid" class="mx-auto">{{user?.name}}</h2>
+    <h2 *ngIf="invalid">Invalid User</h2>
+  </div>
+  <div class="card" style="margin-top: 5em;">
+  <div class="card-body container" *ngIf="!invalid">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            Personal Information
+          </div>
+          <img src="{{user?.avatar_url}}" class="card-img-top">
+          <div class="card-body text-center">
+            <h4 class="card-title">{{user?.name}}</h4>
+            <h5 class="card-subtitle" *ngIf="user?.company"><b>Company: </b>{{user?.company}}</h5>
+            <p class="card-text" *ngIf="user?.bio">{{user?.bio}}</p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngIf="user?.blog">
+                <a href="{{user?.blog}}" target="_blank">{{user?.blog}}</a>
+              </li>
+              <li class="list-group-item" *ngIf="user?.email">
+                <a href="mailto:{{user?.email}}" target="_blank">{{user?.email}}</a>
+              </li>
+              <li class="list-group-item" *ngIf="user?.location">
+                <b>Location: </b>{{user?.location}}
+              </li>
+              <li class="list-group-item" *ngIf="user?.hireable">
+                Available for hire
+              </li>
+              <li class="list-group-item">
+                <b>Public Repos: </b>{{user?.public_repos}}
+              </li>
+              <li class="list-group-item">
+                <b>Public Gists: </b>{{user?.public_gists}}
+              </li>
+              <li class="list-group-item">
+                <b>Followers: </b>{{user?.followers}}
+              </li>
+              <li class="list-group-item">
+                <b>Following: </b>{{user?.following}}
+              </li>
+              <li class="list-group-item">
+                <b>Joined Github: </b>{{user?.created_at|date}}
+              </li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <b>Last Updated: </b>{{user?.updated_at|date}}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">
-          Repositories <span class="badge badge-dark">{{user?.public_repos}}</span>
-        </div>
-        <div class="card-body">
-          <app-repo *ngFor="let i of repos" [repo]="i"></app-repo>
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            Repositories <span class="badge badge-dark">{{user?.public_repos}}</span>
+          </div>
+          <div class="card-body">
+            <app-repo *ngFor="let i of repos" [repo]="i"></app-repo>
+          </div>
         </div>
       </div>
     </div>

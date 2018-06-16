@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
 
   users = [];
   total_count: number;
+  loading:boolean = false;
 
   constructor(private userService: UserService) {
   }
@@ -19,11 +20,13 @@ export class SearchComponent implements OnInit {
   }
 
   search(form: NgForm) {
+    this.loading=true;
     this.userService.searchUsers(form.value.search)
       .subscribe((res) => {
         this.total_count = res['total_count'];
         this.users = res['items'];
         this.users.splice(10);
+        this.loading=false;
       });
   }
 
