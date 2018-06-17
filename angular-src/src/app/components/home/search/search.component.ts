@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user.service";
 import {NgForm} from "@angular/forms";
+import {GithubUserService} from "../../../services/githubUser.service";
 
 @Component({
   selector: 'app-search',
@@ -13,7 +14,7 @@ export class SearchComponent implements OnInit {
   total_count: number;
   loading:boolean = false;
 
-  constructor(private userService: UserService) {
+  constructor(private githubUserService: GithubUserService) {
   }
 
   ngOnInit() {
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit {
     if(!form.valid)
       return;
     this.loading=true;
-    this.userService.searchUsers(form.value.search)
+    this.githubUserService.searchUsers(form.value.search)
       .subscribe((res) => {
         this.total_count = res['total_count'];
         this.users = res['items'];

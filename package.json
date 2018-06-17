@@ -4,10 +4,11 @@
   "description": "githubUsersExplorer",
   "main": "app.js",
   "scripts": {
+    "postinstall": "npm install --prefix ./angular-src",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run build --prefix ./angular-src",
     "start": "node app",
-    "start-dev": "nodemon app",
-    "heroku-postbuild": "npm install --prefix ./angular-src"
+    "start-dev": "nodemon app"
   },
   "dependencies": {
     "body-parser": "*",

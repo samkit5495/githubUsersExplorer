@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../../services/user.service";
 import * as d3 from "d3";
+import {GithubUserService} from "../../../services/githubUser.service";
 
 @Component({
   selector: 'app-followers',
@@ -11,12 +12,12 @@ export class FollowersComponent implements OnInit {
 
   barChartData = [];
 
-  constructor(private userService: UserService) {
+  constructor(private githubUserService: GithubUserService) {
 
   }
 
   ngOnInit() {
-    this.userService.getTopUsersByFollowers()
+    this.githubUserService.getTopUsersByFollowers()
       .subscribe(res => {
         this.barChartData = res['data'];
         var svg = d3.select("svg"),
@@ -45,7 +46,13 @@ export class FollowersComponent implements OnInit {
         g.append("g")
           .attr("class", "axis axis--x")
           .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+          .call(d3.axisBottom(x))
+          .append("text")
+          .attr("y",31)
+          .attr("x", 500)
+          .attr("text-anchor", "end")
+          .attr("fill", "#5D6971")
+          .text('Github Users');
 
         g.append("g")
           .attr("class", "axis axis--y")
@@ -54,7 +61,7 @@ export class FollowersComponent implements OnInit {
           }).tickSizeInner([-width]))
           .append("text")
           .attr("transform", "rotate(-90)")
-          .attr("y", 6)
+          .attr("y", 0)
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .attr("fill", "#5D6971")

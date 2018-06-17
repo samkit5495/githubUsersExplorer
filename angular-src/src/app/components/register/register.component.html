@@ -1,3 +1,26 @@
-<p>
-  register works!
-</p>
+<div class="container col-md-4">
+  <div class="card card-login mx-auto mt-5">
+    <div class="card-header">Register</div>
+    <div class="card-body">
+      <form #register="ngForm" (ngSubmit)="onSubmit(register)">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input class="form-control" name="username" id="exampleInputEmail1" type="text" aria-describedby="emailHelp"
+                 placeholder="Enter Username" ngModel>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input class="form-control" name="password" id="exampleInputPassword1" type="password" placeholder="Password"
+                 ngModel>
+        </div>
+        <button type="submit" class="btn btn-success btn-block">Register</button>
+      </form>
+      <div class="text-center alert-info">
+        {{message}}
+      </div>
+      <div class="text-center">
+        <a class="d-block small mt-3 green-color" routerLink="/login">Have an account ?</a>
+      </div>
+    </div>
+  </div>
+</div>

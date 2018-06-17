@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
 export class UserService {
@@ -9,44 +9,31 @@ export class UserService {
 
   constructor(private http: HttpClient) {
     console.log('User services started!');
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  searchUsers(parameter: string) {
-    return this.http.get('https://api.github.com/search/users?q='+parameter);
-  }
-
-  getUser(login: string) {
-    return this.http.get('https://api.github.com/users/' + login);
-  }
-
-  get(url: string) {
-    return this.http.get(url);
-  }
-
-  insertUser(userData) {
-    return this.http.post('http://127.0.0.1:3000/api/user/dumpUserData', userData);
-  }
-
-  getTopUsersByFollowers() {
-    return this.http.get('http://127.0.0.1:3000/api/user/getTopUsersByFollowers');
-  }
-
-  changePassword(userid: string, password: string) {
-    return this.http.post('/api/user/changePassword/' + userid, {
-      'password': password,
-    });
-  }
-
-  deleteUser(id: string) {
-    return this.http.get('/api/user/delete/' + id);
-  }
-
-  authenticate(email: string, password: string) {
-    return this.http.post('/api/user/authenticate', {
-      'email': email,
+  register(username: string, password: string) {
+    return this.http.post('/api/user/register', {
+      'username': username,
       'password': password
     });
+  }
+
+  getClientId(username: string) {
+    return this.http.post('/api/user/getClientId', {
+      'username': username
+    });
+  }
+
+  authenticate(username: string, password: string, client_id: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization:'Basic '+ btoa(client_id+':secret')
+      })
+    };
+    return this.http.post(`/oauth/token?grant_type=password&username=${username}&password=${password}`,{}, httpOptions);
   }
 
   getCurrentUser() {

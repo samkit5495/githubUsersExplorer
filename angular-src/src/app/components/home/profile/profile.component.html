@@ -1,9 +1,8 @@
-  <div class="text-center card-header fixed-top" [ngClass]="{'centered':invalid}">
-    <i class="fa fa-arrow-left fa-3x pull-left" routerLink="/home/search"></i>
-    <h2 *ngIf="!invalid" class="mx-auto">{{user?.name}}</h2>
-    <h2 *ngIf="invalid">Invalid User</h2>
-  </div>
-  <div class="card" style="margin-top: 5em;">
+<div class="text-center card-header fixed-top" [ngClass]="{'centered':invalid}" style="z-index: -1;">
+  <h2 *ngIf="!invalid" class="mx-auto">{{user?.name}}</h2>
+  <h2 *ngIf="invalid">Invalid User</h2>
+</div>
+<div class="card" style="margin-top: 5em;z-index: -10">
   <div class="card-body container" *ngIf="!invalid">
     <div class="row">
       <div class="col-md-4">

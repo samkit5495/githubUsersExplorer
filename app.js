@@ -24,6 +24,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 //Get our API routes
+let githubUser = require('./routes/githubUser');
 let user = require('./routes/user');
 
 const port = process.env.PORT || '3000';
@@ -32,8 +33,13 @@ const port = process.env.PORT || '3000';
 app.use(cors());
 
 // Parsers for POST data
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+app.use(function(req, res, next) {
+  if(req.headers['content-type'] === 'application/x-www-form-urlencoded') req.body = req.query;
+  return next();
+});
 
 app.oauth = oauthserver({
   model: require('./models.js'),
@@ -43,26 +49,20 @@ app.oauth = oauthserver({
 
 app.all('/oauth/token', app.oauth.grant());
 
-app.get('/', app.oauth.authorise(), function (req, res) {
-  res.send('Congratulations, you are in a secret area!');
-});
-
 app.use(app.oauth.errorHandler());
 
 // Point static path to dist
 app.use('', express.static(path.join(__dirname, 'dist')));
 
-// Body Parser Middleware
-app.use(bodyParser.json());
-
 // Set our api routes
+app.use('/api/githubUser', app.oauth.authorise(), githubUser);
 app.use('/api/user', user);
 
 // Catch all other routes and return the index file
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist/index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
 
 /**
  * Get port from environment and store in Express.

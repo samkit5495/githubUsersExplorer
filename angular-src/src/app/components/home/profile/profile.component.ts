@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../../services/user.service";
+import {GithubUserService} from "../../../services/githubUser.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,23 +15,23 @@ export class ProfileComponent implements OnInit {
   repos;
   invalid: boolean = false;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(private route: ActivatedRoute, private githubUserService: GithubUserService) {
   }
 
   ngOnInit() {
     this.login = this.route.snapshot.params['login'];
-    this.userService.getUser(this.login)
+    this.githubUserService.getUser(this.login)
       .subscribe(res => {
         if ('message' in res && res['message'] == 'Not Found') {
           this.invalid = true;
           return;
         }
         this.user = res;
-        this.userService.insertUser(this.user)
+        this.githubUserService.insertUser(this.user)
           .subscribe(result=>{
             console.log(result);
           });
-        this.userService.get(this.user.repos_url)
+        this.githubUserService.get(this.user.repos_url)
           .subscribe(res => {
             this.repos = res;
           });

@@ -14,6 +14,8 @@ import { UserComponent } from './components/user/user.component';
 import { ProfileComponent } from './components/home/profile/profile.component';
 import { RepoComponent } from './components/repo/repo.component';
 import { FollowersComponent } from './components/home/followers/followers.component';
+import {GithubUserService} from "./services/githubUser.service";
+import { Error404Component } from './components/error404/error404.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { FollowersComponent } from './components/home/followers/followers.compon
     UserComponent,
     ProfileComponent,
     RepoComponent,
-    FollowersComponent
+    FollowersComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { FollowersComponent } from './components/home/followers/followers.compon
     appRouting
   ],
   providers: [
-    UserService
+    UserService,
+    GithubUserService
   ],
   bootstrap: [AppComponent]
 })
