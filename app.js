@@ -36,7 +36,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.oauth = oauthserver({
-  model: require('./model.js'),
+  model: require('./models.js'),
   grants: ['password'],
   debug: true
 });
@@ -60,9 +60,9 @@ app.use('/api/user', user);
 
 // Catch all other routes and return the index file
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'dist/index.html'));
+// });
 
 /**
  * Get port from environment and store in Express.

@@ -11,8 +11,9 @@ import {UserService} from "./services/user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import { UserComponent } from './components/user/user.component';
-import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileComponent } from './components/home/profile/profile.component';
 import { RepoComponent } from './components/repo/repo.component';
+import { FollowersComponent } from './components/home/followers/followers.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RepoComponent } from './components/repo/repo.component';
     SearchComponent,
     UserComponent,
     ProfileComponent,
-    RepoComponent
+    RepoComponent,
+    FollowersComponent
   ],
   imports: [
     BrowserModule,

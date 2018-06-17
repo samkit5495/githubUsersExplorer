@@ -24,20 +24,12 @@ export class UserService {
     return this.http.get(url);
   }
 
-  insertUser(name: string, email: string, password: string) {
-    return this.http.post('/api/user/add', {
-      'name': name,
-      'email': email,
-      'password': password
-    });
-
+  insertUser(userData) {
+    return this.http.post('http://127.0.0.1:3000/api/user/dumpUserData', userData);
   }
 
-  updateUser(userid: string, name: string, email: string) {
-    return this.http.post('/api/user/update/' + userid, {
-      'name': name,
-      'email': email
-    });
+  getTopUsersByFollowers() {
+    return this.http.get('http://127.0.0.1:3000/api/user/getTopUsersByFollowers');
   }
 
   changePassword(userid: string, password: string) {

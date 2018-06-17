@@ -6,12 +6,15 @@
           <h1 align="center">Github Users Explorer</h1>
           <form #form="ngForm" (ngSubmit)="search(form)">
             <div class="input-group mb-3 col-md-8 mx-auto">
-              <input type="text" class="form-control" placeholder="Search" name="search" ngModel>
+              <input type="text" class="form-control" placeholder="Search" name="search" ngModel required [ngClass]="{'is-invalid':!form.valid}">
               <div class="input-group-append">
-                <button class="btn" type="submit" [disabled]="loading">
+                <button class="btn btn-outline-success" type="submit" [disabled]="loading">
                   <span *ngIf="loading">Searching </span>
                   <span *ngIf="!loading">Search </span>
                   <i class="fa fa-search"></i>
+                </button>
+                <button class="btn btn-outline-info" type="button" routerLink="/home/followers">
+                  Followers Chart <i class="fa fa-line-chart"></i>
                 </button>
               </div>
             </div>

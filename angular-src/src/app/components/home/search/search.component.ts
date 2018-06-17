@@ -20,6 +20,8 @@ export class SearchComponent implements OnInit {
   }
 
   search(form: NgForm) {
+    if(!form.valid)
+      return;
     this.loading=true;
     this.userService.searchUsers(form.value.search)
       .subscribe((res) => {

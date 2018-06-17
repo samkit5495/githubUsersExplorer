@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +26,10 @@ export class ProfileComponent implements OnInit {
           return;
         }
         this.user = res;
+        this.userService.insertUser(this.user)
+          .subscribe(result=>{
+            console.log(result);
+          });
         this.userService.get(this.user.repos_url)
           .subscribe(res => {
             this.repos = res;
